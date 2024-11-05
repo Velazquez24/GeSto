@@ -1,7 +1,13 @@
 <template>
     <div>
         <h1>Lista de Tareas</h1>
+        <div v-if="showAddTaskForm" class="add-task-form">
+            <input v-model="newTask" placeholder="Nueva tarea" />
+            <button @click="addTask">Agregar Tarea</button>
+        </div>
+
         <button @click="fetchTasks">Cargar Tareas</button>
+
         <div v-if="tasks.length > 0">
             <div v-for="task in tasks" :key="task.id">
                 <div>
@@ -18,28 +24,49 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
     name: "TaskList",
     data() {
         return {
-            tasks: [], // Almacenamiento local de las tareas traídas de la API
+            tasks: [],
+            newTask: "",         
+            showAddTaskForm: false 
         };
     },
+    mounted() {
+        if (this.$route.query.addTask === 'true') {
+            this.showAddTaskForm = true;
+        }
+    },
     methods: {
-        // Llamada para obtener las tareas desde la API externa
-        fetchTasks() {
-            // Aquí deberían realizar la solicitud a la API usando axios o fetch.
-            // La URL que usaremos es: https://dummyjson.com/todos
-
-            // Sugerencia: Intentar implementarlo con axios o fetch
+        async fetchTasks() {
+            try {
+                const response = await axios.get('https://dummyjson.com/todos');
+                this.tasks = response.data.todos;
+            } catch (error) {
+                console.error("Error al cargar las tareas:", error);
+            }
         },
+        addTask() {
+            if (this.newTask.trim()) {
+                // Crear una nueva tarea con un ID único y agregarla a la lista
+                const task = {
+                    id: this.tasks.length + 1,
+                    todo: this.newTask,
+                    completed: false,
+                };
+                this.tasks.push(task);
 
-        // Cambiar el estado de una tarea (completada/no completada)
+                // Limpiar el campo de entrada y ocultar el formulario
+                this.newTask = "";
+                this.showAddTaskForm = false;
+            }
+        },
         toggleTaskCompletion(task) {
             task.completed = !task.completed;
         },
-
-        // Eliminar la tarea seleccionada
         deleteTask(task) {
             this.tasks = this.tasks.filter((t) => t.id !== task.id);
         },
@@ -48,5 +75,7 @@ export default {
 </script>
 
 <style scoped>
-/* Aquí pueden experimentar con estilos de tu preferencia */
+.add-task-form {
+    margin-bottom: 20px;
+}
 </style>

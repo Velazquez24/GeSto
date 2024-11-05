@@ -1,0 +1,33 @@
+/* src/assets/global.css */
+
+body {
+    background-color: #121212; /* Fondo oscuro global */
+    color: #ffffff; /* Texto claro global */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    color: #ffffff;
+  }
+  
+  p, span, a, li, button {
+    color: #cccccc; /* Texto gris claro */
+  }
+  
+  button {
+    background-color: #1e88e5; /* Color de botón global */
+    color: #ffffff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #1565c0;
+  }
+  
+  

@@ -30,8 +30,8 @@ export default {
     name: "AddTask",
     data() {
         return {
-            newTask: "", // Campo de entrada para la nueva tarea
-            tasks: [],   // Lista de tareas locales
+            newTask: "", 
+            tasks: [],   
         };
     },
     methods: {
@@ -44,17 +44,13 @@ export default {
                 id: Date.now(), 
             };
 
-            // Añadir la nueva tarea al inicio de la lista
             this.tasks.unshift(newTask);
-            this.newTask = ""; // Limpiar el campo de entrada después de agregar
+            this.newTask = ""; 
         },
 
-        // Elimina una tarea específica de la lista
         deleteTask(task) {
             this.tasks = this.tasks.filter((t) => t.id !== task.id);
         },
-
-        // Cambia el estado de la tarea entre completada y no completada
         toggleTaskCompletion(task) {
             task.completed = !task.completed;
         },
