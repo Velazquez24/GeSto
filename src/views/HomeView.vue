@@ -2,7 +2,7 @@
   <div class="home container text-center py-5">
     <div class="intro-section mb-4">
       <img alt="Vue logo" src="../assets/logo.png" class="app-logo mb-3 img-fluid" />
-      <h1 class="display-4 text-white">Bienvenido a App Tarea</h1>
+      <h1 class="display-4 text-white">Bienvenido al gestor de tareas</h1>
       <p class="intro-text text-muted lead">Tu gestor de tareas personal para mantenerte organizado y productivo.</p>
     </div>
 
